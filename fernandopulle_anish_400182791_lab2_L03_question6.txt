@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+
+void efficient( const int source[], int val[], int pos[], int size);
+void reconstruct( int source[], int m, const int val[], const int pos[], int n);
+
+int main()
+{
+    int source1[10] = {0, 0, 34, 7, 0, 8, 20, 4, 15, 0};
+    int val1[6] = {0, 0, 0, 0, 0, 0};
+    int pos1[6] = {0, 0, 0, 0, 0, 0};
+    efficient(source1, val1, pos1, 10);
+    
+    int source2[7] = {0, 0, 0, 0, 0, 0, 0};
+    int val2[3] = {2, 5, 16};
+    int pos2[3] = {1, 2, 5};
+    reconstruct(source2, 7, val2, pos2, 3);
+    return 0;
+}
+
+void efficient( const int source[], int val[], int pos[], int size) {
+    int i;
+    int v = 0;
+    int p = 0;
+    for (i = 0; i < size; i++) {
+        if (source[i] != 0) { // selects all values in source that are non-zero
+            val[v] = source[i]; // appends the value to val
+            pos[p] = i; // appends the position of the value to pos
+            v++;
+            p++;
+        }
+    }
+    printf("Val = ");
+    for(int i=0;i<6;i++) {
+        printf("%d ",val[i]);
+    }
+
+    printf("\nPos = ");
+    for(int i=0;i<6;i++) {
+        printf("%d ",pos[i]);
+    }
+}
+
+void reconstruct( int source[], int m, const int val[], const int pos[], int n) {
+    int v = 0;
+    int p = 0;
+    int i = 0;
+    
+    for (i = 0; i < 7; i++) {
+        if (pos[p] == i) { // checks whether the position of the values in val are placed at the proper index
+            source[i] = val[v];
+            p++;
+            v++;
+        }
+    }
+    
+    printf("\n\nSource = ");
+    for (i = 0; i < 7; i++) {
+        printf("%d ", source[i]);
+    }
+}

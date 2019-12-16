@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+
+void letter_freq(const char word[], int freq[]);
+
+int main()
+{
+    int frequency[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+     char word[] = "This is a string";
+    letter_freq(word, frequency);
+}
+
+void letter_freq(const char word[], int freq[]) {
+    int len, i;
+    len = strlen(word); // calculates the length of the string
+    for (i = 0; i < len; i++) {
+        if (word[i] - 90 < 0) { // for uppercase
+            freq[word[i]-65]++;
+        }
+        else { // for lowercase
+            freq[word[i] - 97]++;
+        }
+    }
+    printf("A B C D E F G H I J K L M N O P Q R S T U V W X Y Z (or its lowercase counterpart\n");
+
+    for (i = 0; i < 26; i++) {
+        printf("%d ", freq[i]);
+    }
+}
+
+
